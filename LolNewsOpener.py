@@ -1,5 +1,8 @@
 import os
+import sys
+import time
 import webbrowser
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -8,6 +11,7 @@ def patch_finder(patch_notes_new):
     url_id = patch_notes_new[0].split()[1].replace('.', '-')
     url = "https://www.leagueoflegends.com/en-gb/news/game-updates/patch-" + url_id + "-notes/"
     return url
+
 
 def check_if_new_patch():
     file_path = os.path.join("./", "already_crawled.txt")
@@ -26,14 +30,21 @@ def check_if_new_patch():
 
     patch_notes_new = []
     f = open("already_crawled.txt", "w")
-    for quote in soup.find_all('h2'):
-        f.writelines(quote.text + "\n")
-        patch_notes_new.append(quote.text)
+    aria_labels = [a.get('aria-label') for a in soup.find_all('a') if a.get('aria-label')]
+    for label in aria_labels:
+        f.writelines(label + "\n")
+        patch_notes_new.append(label)
     f.close()
 
     # Checks if the recent patch_notes are newer than the saved ones.
     if patch_notes_old == [] or patch_notes_old[0] == patch_notes_new[1]:
+        print("New patch available!")
         return patch_finder(patch_notes_new)
+    else:
+        print("No new patch available")
+        print("Exiting in 3 seconds...")
+        time.sleep(3)
+        sys.exit()
 
 
 url = check_if_new_patch()
