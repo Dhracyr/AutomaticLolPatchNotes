@@ -8,8 +8,8 @@ from bs4 import BeautifulSoup
 
 
 def patch_finder(patch_notes_new):
-    url_id = patch_notes_new[0].split()[1].replace('.', '-')
-    url = "https://www.leagueoflegends.com/en-gb/news/game-updates/patch-" + url_id + "-notes/"
+    url_id = patch_notes_new[0].replace('.', '-').replace(' ', '-').lower()
+    url = "https://www.leagueoflegends.com/en-gb/news/game-updates/" + url_id + "/"
     return url
 
 
