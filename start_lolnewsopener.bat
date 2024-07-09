@@ -1,2 +1,2 @@
-cd C:\Users\Dhracyr\Documents\Uni\8_Semester\AutomaticLolPatchNotes
+cd [PROGRAMS DIRECTORY e.g. C:/PythonPrograms/AutomaticLolPatchNotes]
 python.exe LolNewsOpener.py
