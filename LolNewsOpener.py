@@ -2,12 +2,12 @@ import os
 import sys
 import time
 import webbrowser
-
 import requests
 from bs4 import BeautifulSoup
 
 
 def patch_finder(patch_notes_new):
+    # Takes the newest patch note's name, transforms it and creates the url
     url_id = patch_notes_new[0].replace('.', '-').replace(' ', '-').lower()
     url = "https://www.leagueoflegends.com/en-gb/news/game-updates/" + url_id + "/"
     return url
