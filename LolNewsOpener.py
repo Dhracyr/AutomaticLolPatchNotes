@@ -25,7 +25,10 @@ def check_if_new_patch():
 
     # Crawls and writes recent patchnotes.
     url = "https://www.leagueoflegends.com/en-gb/news/tags/patch-notes/"
-    response = requests.get(url)
+    try:
+        response = requests.get(url)
+    except:
+        print("Url could not be reached.")
     soup = BeautifulSoup(response.content, "lxml")
 
     patch_notes_new = []
